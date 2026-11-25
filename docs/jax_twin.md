@@ -171,8 +171,11 @@ continue. Under `vmap` a loop runs as long as its slowest lane, so this avoids
 having every pixel wait for the one ray grazing along a bridge wall. The result
 is identical to one long march, and several times faster.
 
-The JAX camera can also draw the **bridges' side rails as tubes** (only in the
-image; collisions and LiDARs keep the thin rails):
+The JAX camera draws the bridges in wood by default, exactly like the main
+simulator's camera (`bridge_style: wood`, see {doc}`sensors/camera`). With
+`bridge_style: plain` and `wall_style: tubes` it can instead draw the
+**bridges' side rails as tubes** (only in the image; collisions and LiDARs keep
+the thin rails):
 
 ```{figure} assets/jax_camera_rail_tubes.png
 :alt: plain walls and rails (left) and tube walls and rails (right) on two bridge maps

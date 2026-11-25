@@ -126,7 +126,9 @@ On a {doc}`2.5D map <../map_2p5d>` the camera draws the bridges.
   shade, wood grain, dark seams) and **side walls of stacked boards**.
 - `plain` — a grey deck and orange side walls.
 
-Only the image changes. **Depth and labels are identical** for both styles
+Both simulators draw the same wood (the JAX twin matches the main simulator's
+image pixel for pixel, up to single pixels on seams). Only the image changes.
+**Depth and labels are identical** for both styles
 (deck = 7, bridge wall = 8), so anything trained on depth or labels does not
 care.
 
