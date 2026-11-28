@@ -4,7 +4,8 @@ Every car takes an action row `[steer, cmd]`:
 
 - `steer` — the **target steering angle** in radians. It passes through the
   steering delay and controller; the actual angle follows within the steering
-  rate and angle limits.
+  rate and angle limits. (Or a steering *rate*, see
+  [Steering as a rate](#steering-rate).)
 - `cmd` — the longitudinal command. **What it means depends on the control
   mode.**
 
@@ -98,6 +99,32 @@ Two optional extensions add columns to the action row:
 
 The simulator checks the action width and raises an error if the row is too
 narrow.
+
+(steering-rate)=
+## Steering as a rate (`direct_steer_rate`)
+
+By default `steer` is an angle that goes through the steering delay and the
+steering servo controller. With
+
+```yaml
+model:
+  direct_steer_rate: true
+```
+
+`steer` is instead the **steering rate** $\dot\delta$ in rad/s. It is clipped
+to the steering-rate limit and fed straight to the model, without the delay and
+the servo controller. Use it when your controller's own model integrates the
+steering angle from a rate input (many MPC formulations do), so that the
+simulator and the controller agree on what the steering command means.
+
+- It works with every vehicle model, including `std4w`, and with every
+  control mode for `cmd`.
+- It is off by default; existing setups are unchanged.
+- It can also be set per car after creating the environment:
+  `env.sim.agents[0].direct_steer_rate = True`.
+- The JAX twin has the same option (`direct_steer_rate=True` in `make`), and
+  its action space bounds then follow the steering-rate limit
+  ({doc}`jax_twin`).
 
 ## Multi-agent racing: gap keeping
 

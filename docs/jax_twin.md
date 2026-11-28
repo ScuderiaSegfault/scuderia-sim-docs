@@ -40,7 +40,9 @@ obs, state, rewards, dones, info = env.step(jax.random.key(1), state, action)
 The action is a steering **angle** plus a speed setpoint (in `speed` mode),
 as in the numba simulator. Many other F1TENTH-style simulators take a steering
 *rate* and an acceleration. A controller brought over without changing the
-mapping will seem to work and steer wrongly.
+mapping will seem to work and steer wrongly. If your controller does command
+a steering rate, switch on `direct_steer_rate` ({doc}`control_modes`) in both
+simulators instead of converting.
 ```
 
 ## Batching

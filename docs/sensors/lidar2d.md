@@ -53,6 +53,12 @@ car's own outline; a value below a small threshold is a collision with the
 environment. Car–car collisions are checked separately on the cars' rectangles
 (separating-axis test).
 
+On a collision with the environment the car **stops**: its velocities (speed,
+yaw rate, wheel speeds) are set to zero, while its position, steering angle
+and **heading** stay as they were. So an evaluation that keeps running after a
+contact (lap time, lateral error, steering rate) sees the car where and how it
+hit the wall, not turned to a default heading.
+
 ## On 2.5D maps
 
 Each car has a **level** (ground, deck 1, deck 2, …). Its 2D LiDAR traces the

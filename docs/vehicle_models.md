@@ -18,6 +18,22 @@ The tables on this page list **which** parameters exist and what they mean.
 The identified values for our car are not published here.
 ```
 
+## Vehicle files
+
+A vehicle file (YAML) holds the parameter set: geometry, inertia, actuator
+limits, driveline, tyre parameters and the model selection. Two come with the
+simulator:
+
+| file | car |
+|---|---|
+| `rc10_default.yaml` | the default 1:10 RC car; every setting is documented in it |
+| `car_21.yaml` | the TU Wien F1TENTH race car *car_21*, calibrated on the real vehicle and validated in closed loop with `std` and the `current` control mode |
+
+For `car_21` only the `std` model with the full Pacejka tyre is validated; the
+other tyre sets and the four-wheel (`std4w`) block are derived from its
+measured values, not measured themselves. In the JAX twin, vehicle files can
+inherit from another file (`extends:`), so a new car only lists what differs.
+
 ## Geometry: the single-track ("bicycle") model
 
 `ks`, `st` and `std` lump the two wheels of each axle into one wheel on the
